@@ -15,11 +15,15 @@ class AuthService{
         return User::create($userData);
     }   
 
-    public function login(array $data): User{
+    public function login(array $data): ?array{
         $user = User::where('email', $data['email'])->first();
         
         if ($user && Hash::check($data['password'], $user->password)) {
-            return $user;
+            return [
+                    'user' => $user, 
+                    'token' => $user->createToken('api_token')->plainTextToken,
+                    'expiresAt' => now()->addMinutes(config('sanctum.expiration')),
+                    ];
         }
         return null; 
     } 

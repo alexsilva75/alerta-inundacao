@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\OneToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Confirmacao;
 
 
@@ -14,14 +14,17 @@ class Incidente extends Model
                             'titulo',
                             'descricao',
                             'data_hora',
-                            'latitude',
-                            'longitude',
                             'bairro',
                             'cidade',
                             'uf',
+                            'latitude',
+                            'longitude',                           
+                            'user_id',
+                            'nivel_severidade',
+                            'ativo',
                         ];
 
-    public function confirmacoes(): OneToMany{
-        return $this->oneToMany(Confirmacao::class);
+    public function confirmacoes(): HasMany{
+        return $this->hasMany(Confirmacao::class);
     }
 }
