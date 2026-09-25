@@ -32,7 +32,9 @@ class StoreIncidenteRequest extends FormRequest
             'uf' => ['required', 'string', 'max:2'],
             'latitude' => ['required', 'numeric'],
             'longitude' => ['required', 'numeric'],
-            'user_id' => ['required', 'integer']
+            'user_id' => ['required', 'integer'],
+            'foto' => ['nullable', 'image', 'max:5120'],
+            'nivel_severidade' => ['nullable', 'string'],
         ];
     }
 }

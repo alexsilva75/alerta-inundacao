@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Confirmacao;
 use DateTimeInterface;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Incidente extends Model
 {
@@ -22,6 +24,7 @@ class Incidente extends Model
                             'user_id',
                             'nivel_severidade',
                             'ativo',
+                            'foto_url'
                         ];
 
     public function confirmacoes(): HasMany{
@@ -39,6 +42,16 @@ class Incidente extends Model
     protected function serializeDate(DateTimeInterface $date): string
     {
         return $date->utc()->toISOString();
+    }
+
+
+    protected function fotoUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value
+                ? Storage::url($value)
+                : null,
+        );
     }
 
 }

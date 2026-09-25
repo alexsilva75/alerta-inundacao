@@ -35,6 +35,10 @@ class IncidenteController extends Controller
             $incidenteData['data_hora']
         )->format('Y-m-d H:i:s');
 
+        if($request->hasFile('foto')){
+            $incidenteData['foto_url'] = $request->file('foto')->store('incidentes', 'public');
+        }
+
         $incidente = Incidente::create($incidenteData);
 
         return ['message' => 'Incidente registrado com sucesso', 'data' => $incidente];
