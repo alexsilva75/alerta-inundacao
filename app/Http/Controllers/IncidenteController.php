@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Incidente;
 use App\Http\Requests\StoreIncidenteRequest;
+use Illuminate\Support\Carbon;
 
 class IncidenteController extends Controller
 {
-    /**
+    
+
+/**
      * Display a listing of the resource.
      */
     public function index()
@@ -23,9 +26,16 @@ class IncidenteController extends Controller
     public function store(StoreIncidenteRequest $request)
     {
         //
+        //dd(auth()->user());
         $incidenteData = $request->validated();
 
-        $incidente = Incidente::create($incident);
+        $incidenteData = $request->validated();
+
+        $incidenteData['data_hora'] = Carbon::parse(
+            $incidenteData['data_hora']
+        )->format('Y-m-d H:i:s');
+
+        $incidente = Incidente::create($incidenteData);
 
         return ['message' => 'Incidente registrado com sucesso', 'data' => $incidente];
     }

@@ -12,7 +12,7 @@ class StoreIncidenteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,12 +26,12 @@ class StoreIncidenteRequest extends FormRequest
             //
             'titulo' => ['required', 'string', 'max:150'],
             'descricao' => ['string', 'max:500'],
-            'data_hora' => ['required', 'date_format:Y-m-d H'],
+            'data_hora' => ['required', 'date'],
             'bairro' => ['required', 'string', 'max:100'],
             'cidade' => ['required', 'string', 'max:100'],
             'uf' => ['required', 'string', 'max:2'],
-            'latitude' => ['required', 'double'],
-            'longitude' => ['required', 'double'],
+            'latitude' => ['required', 'numeric'],
+            'longitude' => ['required', 'numeric'],
             'user_id' => ['required', 'integer']
         ];
     }
