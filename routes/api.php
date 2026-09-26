@@ -14,4 +14,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);
 
 Route::get('/incidentes/home-search', [HomeController::class, 'index']);
+Route::get('/incidentes/search', [HomeController::class, 'search']);
+Route::get('/incidentes/user/{userId}', [IncidenteController::class, 'fetchByUser']);
+
+
 Route::apiResource('incidentes', IncidenteController::class)->middleware('auth:sanctum'); 

@@ -58,6 +58,9 @@ class IncidenteController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $incidente = Incidente::find($id);
+        $incidente->fill($request->all());
+        return $incidente->save();
     }
 
     /**
@@ -66,5 +69,9 @@ class IncidenteController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function fetchByUser(string $userId){
+        return Incidente::where('user_id', $userId)->get();
     }
 }

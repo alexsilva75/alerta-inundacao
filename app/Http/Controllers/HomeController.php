@@ -16,8 +16,15 @@ class HomeController extends Controller
     {
         $cidade = $request->get('cidade');
         $uf = $request->get('uf');
-        // $incidentes = Incidente::where('cidade', $cidade)
-        //                     ->where('uf', $uf);
+        
         return response()->json(['data' => $this->homeService->fetchHomeData($cidade, $uf)], 200);
+    }
+
+    public function search(Request $request){
+        $cidade = $request->get('cidade');
+        $uf = $request->get('uf');
+        $ativo = $request->get('ativo');
+
+        return response()->json(['data' => $this->homeService->homeSearch($cidade, $uf, $ativo)], 200);
     }
 }

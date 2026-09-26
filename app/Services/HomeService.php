@@ -15,6 +15,14 @@ class HomeService{
                         ->get();
     }
 
+    public function fetchIncidents($cidade, $uf, $ativo)
+    {
+        return Incidente::where('cidade', $cidade)
+                        ->where('uf', $uf)
+                        ->where('ativo', $ativo)
+                        ->get();
+    }
+
     public function fetchStats($cidade, $uf){
         $stats =  Incidente::query()
             ->select([
@@ -42,6 +50,13 @@ class HomeService{
 
     public function fetchHomeData($cidade, $uf){
         $incidentes = $this->fetchActiveIncidents($cidade, $uf);
+        $stats = $this->fetchStats($cidade, $uf);
+
+        return ['incidentes' => $incidentes, 'stats' => $stats];
+    }
+
+    public function homeSearch($cidade, $uf, $ativo){
+        $incidentes = $this->fetchIncidents($cidade, $uf, $ativo);
         $stats = $this->fetchStats($cidade, $uf);
 
         return ['incidentes' => $incidentes, 'stats' => $stats];
