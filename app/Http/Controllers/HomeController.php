@@ -25,6 +25,8 @@ class HomeController extends Controller
         $uf = $request->get('uf');
         $ativo = $request->get('ativo');
 
+        $ativo = $ativo === 'true' ? true : false;
+
         return response()->json(['data' => $this->homeService->homeSearch($cidade, $uf, $ativo)], 200);
     }
 }
