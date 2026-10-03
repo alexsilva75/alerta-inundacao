@@ -21,9 +21,10 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Administrator',
             'email' => 'admin@alertas.com',
-            'password' => Hash::make(config('INITIAL_ADMIN_PASS')),
+            'password' => Hash::make(config('ADMIN_INITIAL_PASS', 'admin123')),
             'must_change_pass' => true,
             'is_admin' => true,
+            'is_active' => true,
         ]);
     }
 }

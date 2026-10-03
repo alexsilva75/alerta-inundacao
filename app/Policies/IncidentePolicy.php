@@ -37,7 +37,11 @@ class IncidentePolicy
      */
     public function update(User $user, Incidente $incidente): bool
     {
-        return false;
+        if ($user->is_admin) {
+            return true;
+        }
+
+        return $user->id === $incidente->user_id;
     }
 
     /**
@@ -45,7 +49,11 @@ class IncidentePolicy
      */
     public function delete(User $user, Incidente $incidente): bool
     {
-        return false;
+        if ($user->is_admin) {
+            return true;
+        }
+
+        return $user->id === $incidente->user_id;
     }
 
     /**
@@ -53,7 +61,11 @@ class IncidentePolicy
      */
     public function restore(User $user, Incidente $incidente): bool
     {
-        return false;
+        if ($user->is_admin) {
+            return true;
+        }
+
+        return $user->id === $incidente->user_id;
     }
 
     /**
@@ -61,6 +73,6 @@ class IncidentePolicy
      */
     public function forceDelete(User $user, Incidente $incidente): bool
     {
-        return false;
+        return $user->is_admin;
     }
 }

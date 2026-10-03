@@ -39,6 +39,16 @@ class UserPolicy
         return $user->is_admin;
     }
 
+    public function updateSelf(User $user, User $model): bool
+    {
+        return $user->id === $model->id;
+    }
+
+    public function readSelf(User $user, User $model): bool
+    {
+        return $user->id === $model->id;
+    }
+
     /**
      * Determine whether the user can delete the model.
      */
