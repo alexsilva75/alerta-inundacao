@@ -11,7 +11,7 @@ class AdminUserController extends Controller
     public function search(Request $request)
     {
         $this->authorize('viewAny', \App\Models\User::class);
-        $query = $request->input('query');
+        $query = $request->input('termo');
 
 
 

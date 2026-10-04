@@ -21,8 +21,8 @@ Route::apiResource('incidentes', IncidenteController::class)->middleware('auth:s
 
 Route::middleware(['auth:sanctum',
 'abilities:users:read'])->group(function () {
-    Route::get('/users/search', [\App\Http\Controllers\AdminUserController::class, 'search']);
-    Route::get('/users/{id}', [\App\Http\Controllers\AdminUserController::class, 'fetchById']);
+    Route::get('/admin/users/search', [\App\Http\Controllers\AdminUserController::class, 'search']);
+    Route::get('/admin/users/{id}', [\App\Http\Controllers\AdminUserController::class, 'fetchById']);
     
 });
 
